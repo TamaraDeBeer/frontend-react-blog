@@ -11,7 +11,7 @@ import NotFound from "./pages/notFound/NotFound.jsx";
 function App() {
     return (
         <>
-            <div className="page-container">
+            <div>
                 <Navigation/>
 
                 <Routes>
