@@ -30,17 +30,19 @@ function NewPost() {
             });
             console.log(result.data);
             setAddPost(result.data);
+
         } catch (e) {
             console.error(e);
             toggleErrorAddPost(true);
         }
     }
 
+
     return (
         <main>
             <h2>Verstuur hier een nieuwe post</h2>
             <form onSubmit={handleFormSubmit}>
-            {errorAddPost && <p className="error-message">Stom...</p>}
+            {errorAddPost && <p className="error-message">Er gaat helaas iets mis, probeer het later nog eens ...</p>}
 
                 <NewPostForm
                     inputType="text"
@@ -111,9 +113,9 @@ function NewPost() {
                 </textarea>
 
                 <button type="submit">Versturen</button>
-
             </form>
-
+            {Object.keys(addPost).length > 0 && <p>De post is succesvol verstuurd. <Link to={`/blogposts/${addPost.id}`}>Klik hier</Link></p>}
+            <Link to="/blogposts">Terug naar alle posts</Link>
         </main>
     );
 }

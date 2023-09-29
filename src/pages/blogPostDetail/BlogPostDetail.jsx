@@ -1,18 +1,19 @@
 import {Link, useParams} from "react-router-dom";
 import createDateToString from "../../helpers/createDateToString.jsx";
 import './BlogpostDetail.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
 function BlogpostDetail() {
     const {id} = useParams();
     const [getById, setGetById] = useState({});
-    const [deletePost, setDeletePost] = useState({});
+    const [deletePost, setDeletePost] = useState(false);
     const [errorGetById, toggleErrorGetById] = useState(false);
     const [errorDeletePost, toggleErrorDeletePost] = useState(false);
 
     async function fetchPostById() {
         toggleErrorGetById(false);
+
         try {
             const result = await axios.get(`http://localhost:3000/posts/${id}`);
             console.log(result.data);
@@ -29,12 +30,19 @@ function BlogpostDetail() {
         try {
             const result = await axios.delete(`http://localhost:3000/posts/${id}`);
             console.log(result.data);
-            setDeletePost('Deze post is succesvol verwijderd' + result.data);
+            setDeletePost(true);
         } catch (e) {
             console.error(e);
             toggleErrorDeletePost(true);
         }
     }
+
+    // useEffect(() => {
+    //     console.log('useEffect is called');
+    //     fetchPostById();
+    //     setDeletePost(false);
+    // }, [deletePost]);
+
 
     return (
         <main>
@@ -54,8 +62,11 @@ function BlogpostDetail() {
 
                             <button type="button" onClick={() => deletePostById()}>Verwijder deze post</button>
                             {errorDeletePost && <p className="error-message">Er ging iets mis, allicht is deze post al verwijderd.</p>}
+                            {deletePost && <p>De post is succesvol verwijderd.</p>}
+
 
                             <Link to="/blogposts">Terug naar alle posts</Link>
+
                         </div>
                     }
 
