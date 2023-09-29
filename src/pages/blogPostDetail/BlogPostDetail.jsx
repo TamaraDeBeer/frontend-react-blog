@@ -1,8 +1,9 @@
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import createDateToString from "../../helpers/createDateToString.jsx";
 import './BlogpostDetail.css';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function BlogpostDetail() {
     const {id} = useParams();
@@ -10,6 +11,7 @@ function BlogpostDetail() {
     const [deletePost, setDeletePost] = useState(false);
     const [errorGetById, toggleErrorGetById] = useState(false);
     const [errorDeletePost, toggleErrorDeletePost] = useState(false);
+    const navigate = useNavigate();
 
     async function fetchPostById() {
         toggleErrorGetById(false);
@@ -37,12 +39,6 @@ function BlogpostDetail() {
         }
     }
 
-    // useEffect(() => {
-    //     console.log('useEffect is called');
-    //     fetchPostById();
-    //     setDeletePost(false);
-    // }, [deletePost]);
-
 
     return (
         <main>
@@ -64,9 +60,8 @@ function BlogpostDetail() {
                             {errorDeletePost && <p className="error-message">Er ging iets mis, allicht is deze post al verwijderd.</p>}
                             {deletePost && <p>De post is succesvol verwijderd.</p>}
 
-
-                            <Link to="/blogposts">Terug naar alle posts</Link>
-
+                            <button type="button" onClick={() => navigate(`/blogposts/${getById.id}/edit`)}>Bewerk deze post</button>
+                            <button type="button" onClick={() => navigate("/blogposts/")}>Terug naar alle posts</button>
                         </div>
                     }
 

@@ -7,6 +7,7 @@ import NewPost from "./pages/newPost/NewPost.jsx";
 import AllPosts from "./pages/allPosts/AllPosts.jsx";
 import BlogpostDetail from "./pages/blogpostDetail/BlogpostDetail.jsx";
 import NotFound from "./pages/notFound/NotFound.jsx";
+import UpdatePost from "./pages/updatePost/UpdatePost.jsx";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/new" element={<NewPost/>}/>
                     <Route path="/blogposts" element={<AllPosts/>}/>
                     <Route path="/blogposts/:id" element={<BlogpostDetail/>}/>
+                    <Route path="/blogposts/:id/edit" element={<UpdatePost/>}/>
                     <Route path="*" element={<NotFound/>}/>
 
                 </Routes>

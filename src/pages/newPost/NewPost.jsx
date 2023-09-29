@@ -5,12 +5,13 @@ import "./NewPost.css";
 import {useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function NewPost() {
     const { register, formState: { errors } } = useForm();
     const [addPost, setAddPost] = useState([]);
     const [errorAddPost, toggleErrorAddPost] = useState(false);
-
+    const navigate = useNavigate();
     async function handleFormSubmit(e) {
         e.preventDefault();
         toggleErrorAddPost(false);
@@ -113,9 +114,12 @@ function NewPost() {
                 </textarea>
 
                 <button type="submit">Versturen</button>
+                {Object.keys(addPost).length > 0 && <p>De post is succesvol verstuurd. <Link to={`/blogposts/${addPost.id}`}>Klik hier</Link></p>}
+
+                <button type="button" onClick={() => navigate("/blogposts/")}>Terug naar alle posts</button>
             </form>
-            {Object.keys(addPost).length > 0 && <p>De post is succesvol verstuurd. <Link to={`/blogposts/${addPost.id}`}>Klik hier</Link></p>}
-            <Link to="/blogposts">Terug naar alle posts</Link>
+
+
         </main>
     );
 }

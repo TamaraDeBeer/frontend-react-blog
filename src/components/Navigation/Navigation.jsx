@@ -20,9 +20,9 @@ function Navigation() {
                         Post</NavLink></li>
                     <li><NavLink to="/blogposts" className={({isActive}) => isActive ? 'active-link' : 'default-link'}>Alle
                         Posts</NavLink></li>
-                    <li><NavLink to="/blogposts/:id"
-                                 className={({isActive}) => isActive ? 'active-link' : 'default-link'}>Blogpost
-                        Details</NavLink></li>
+                    {/*<li><NavLink to="/blogposts/:id"*/}
+                    {/*             className={({isActive}) => isActive ? 'active-link' : 'default-link'}>Blogpost*/}
+                    {/*    Details</NavLink></li>*/}
                 </ul>
 
             </div>
