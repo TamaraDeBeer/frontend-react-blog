@@ -8,7 +8,9 @@ import AllPosts from "./pages/allPosts/AllPosts.jsx";
 import BlogpostDetail from "./pages/blogpostDetail/BlogpostDetail.jsx";
 import NotFound from "./pages/notFound/NotFound.jsx";
 
+
 function App() {
+
     return (
         <>
             <div>
