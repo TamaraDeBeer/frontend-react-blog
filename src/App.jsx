@@ -8,26 +8,30 @@ import AllPosts from "./pages/allPosts/AllPosts.jsx";
 import BlogpostDetail from "./pages/blogpostDetail/BlogpostDetail.jsx";
 import NotFound from "./pages/notFound/NotFound.jsx";
 import UpdatePost from "./pages/updatePost/UpdatePost.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 
 
 function App() {
 
     return (
         <>
-            <div>
-                <Navigation/>
 
-                <Routes>
+            <Navigation/>
 
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/new" element={<NewPost/>}/>
-                    <Route path="/blogposts" element={<AllPosts/>}/>
-                    <Route path="/blogposts/:id" element={<BlogpostDetail/>}/>
-                    <Route path="/blogposts/:id/edit" element={<UpdatePost/>}/>
-                    <Route path="*" element={<NotFound/>}/>
+            <Routes>
 
-                </Routes>
-            </div>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/new" element={<NewPost/>}/>
+                <Route path="/blogposts" element={<AllPosts/>}/>
+                <Route path="/blogposts/:id" element={<BlogpostDetail/>}/>
+                <Route path="/blogposts/:id/edit" element={<UpdatePost/>}/>
+                <Route path="*" element={<NotFound/>}/>
+
+            </Routes>
+
+            <Footer/>
+
+
         </>
 
     )

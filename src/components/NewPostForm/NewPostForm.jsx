@@ -17,4 +17,5 @@ function NewPostForm({inputType, inputValue, inputName, inputLabel, inputId, val
 
     );
 }
+
 export default NewPostForm;

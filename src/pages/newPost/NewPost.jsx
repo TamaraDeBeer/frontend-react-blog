@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import calculateReadTime from "../../helpers/calculateReadTime.jsx";
 import NewPostForm from "../../components/NewPostForm/NewPostForm.jsx";
 import "./NewPost.css";
@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 
 function NewPost() {
-    const { register, formState: { errors } } = useForm();
+    const {register, formState: {errors}} = useForm();
     const [addPost, setAddPost] = useState([]);
     const [errorAddPost, toggleErrorAddPost] = useState(false);
     const navigate = useNavigate();
@@ -44,7 +44,8 @@ function NewPost() {
         <main>
             <h2>Verstuur hier een nieuwe post</h2>
             <form onSubmit={handleFormSubmit}>
-            {errorAddPost && <p className="error-message">Er gaat helaas iets mis, probeer het later nog eens ...</p>}
+                {errorAddPost &&
+                    <p className="error-message">Er gaat helaas iets mis, probeer het later nog eens ...</p>}
 
                 <NewPostForm
                     inputType="text"
@@ -115,11 +116,11 @@ function NewPost() {
                 </textarea>
 
                 <button type="submit">Versturen</button>
-                {Object.keys(addPost).length > 0 && <p>De post is succesvol verstuurd. <Link to={`/blogposts/${addPost.id}`}>Klik hier</Link></p>}
+                {Object.keys(addPost).length > 0 &&
+                    <p>De post is succesvol verstuurd. <Link to={`/blogposts/${addPost.id}`}>Klik hier</Link></p>}
 
                 <button type="button" onClick={() => navigate("/blogposts/")}>Terug naar alle posts</button>
             </form>
-
         </main>
     );
 }

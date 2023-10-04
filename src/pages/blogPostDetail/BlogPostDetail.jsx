@@ -58,10 +58,13 @@ function BlogpostDetail() {
                             <p>{getById.comments} reacties - {getById.shares} keer gedeeld</p>
 
                             <button type="button" onClick={() => deletePostById()}>Verwijder deze post</button>
-                            {errorDeletePost && <p className="error-message">Er ging iets mis, allicht is deze post al verwijderd.</p>}
+                            {errorDeletePost &&
+                                <p className="error-message">Er ging iets mis, allicht is deze post al verwijderd.</p>}
                             {deletePost && <p>De post is succesvol verwijderd.</p>}
 
-                            <button type="button" onClick={() => navigate(`/blogposts/${getById.id}/edit`)}>Bewerk deze post</button>
+                            <button type="button" onClick={() => navigate(`/blogposts/${getById.id}/edit`)}>Bewerk deze
+                                post
+                            </button>
                             <button type="button" onClick={() => navigate("/blogposts/")}>Terug naar alle posts</button>
                         </div>
                     }

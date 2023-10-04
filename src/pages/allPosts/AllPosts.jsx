@@ -21,12 +21,14 @@ function AllPosts() {
     }
 
     return (
-        <>
+        <main>
             <section className="all-posts-outer-container">
                 <h2>Overzichtspagina</h2>
 
                 <button type="button" onClick={fetchAllPosts}>Get all posts</button>
-                {errorAllPosts && <p className="error-message">De connectie met de database is tijdelijk verbroken, probeer het over enkele minuten nog eens...</p>}
+                {errorAllPosts &&
+                    <p className="error-message">De connectie met de database is tijdelijk verbroken, probeer het over
+                        enkele minuten nog eens...</p>}
                 <p>Totaal aantal blogs: {allPosts.length}</p>
                 {allPosts.map((post) => (
                     <div key={post.id} className="all-posts-inner-container">
@@ -35,7 +37,7 @@ function AllPosts() {
                     </div>
                 ))}
             </section>
-        </>
+        </main>
     )
 }
 

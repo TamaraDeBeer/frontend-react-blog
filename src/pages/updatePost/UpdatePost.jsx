@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 
 function UpdatePost() {
     const {id} = useParams();
-    const { register, formState: { errors } } = useForm();
+    const {register, formState: {errors}} = useForm();
     const [updatePost, setUpdatePost] = useState([]);
     const [errorUpdatePost, toggleErrorUpdatePost] = useState(false);
     const [getById, setGetById] = useState({});
@@ -17,7 +17,7 @@ function UpdatePost() {
     useEffect(() => {
         console.log('useEffect is called');
         fetchPostById();
-    } , []);
+    }, []);
 
     async function fetchPostById() {
         try {
@@ -68,7 +68,8 @@ function UpdatePost() {
             <h2>Update hier uw post</h2>
             <h4>Je moet in ieder geval de titel, subtitel en auteur opnieuw intypen.</h4>
             <form onSubmit={handleFormUpdateSubmit}>
-                {errorUpdatePost && <p className="error-message">Er gaat helaas iets mis, probeer het later nog eens ...</p>}
+                {errorUpdatePost &&
+                    <p className="error-message">Er gaat helaas iets mis, probeer het later nog eens ...</p>}
 
                 <NewPostForm
                     inputType="text"
@@ -145,11 +146,10 @@ function UpdatePost() {
 
                 <button type="submit">Updaten</button>
                 <button type="button" onClick={() => navigate("/blogposts/")}>Terug naar alle posts</button>
-                {Object.keys(updatePost).length > 0 && <p>De post is succesvol veranderd. <Link to={`/blogposts/${updatePost.id}`}>Klik hier</Link></p>}
-
+                {Object.keys(updatePost).length > 0 &&
+                    <p>De post is succesvol veranderd. <Link to={`/blogposts/${updatePost.id}`}>Klik hier</Link></p>}
 
             </form>
-
         </main>
     )
 }
