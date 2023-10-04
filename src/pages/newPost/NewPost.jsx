@@ -12,9 +12,11 @@ function NewPost() {
     const [addPost, setAddPost] = useState([]);
     const [errorAddPost, toggleErrorAddPost] = useState(false);
     const navigate = useNavigate();
+
     async function handleFormSubmit(e) {
         e.preventDefault();
         toggleErrorAddPost(false);
+        navigate("/blogposts/");
 
         try {
             const result = await axios.post(`http://localhost:3000/posts`, {
@@ -37,7 +39,6 @@ function NewPost() {
             toggleErrorAddPost(true);
         }
     }
-
 
     return (
         <main>
@@ -118,7 +119,6 @@ function NewPost() {
 
                 <button type="button" onClick={() => navigate("/blogposts/")}>Terug naar alle posts</button>
             </form>
-
 
         </main>
     );

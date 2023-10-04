@@ -39,6 +39,7 @@ function UpdatePost() {
     async function handleFormUpdateSubmit(e) {
         e.preventDefault();
         toggleErrorUpdatePost(false);
+        navigate("/blogposts/");
 
         try {
             const result = await axios.put(`http://localhost:3000/posts/${id}`, {

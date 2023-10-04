@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import createDateToString from "../../helpers/createDateToString.jsx";
 import './BlogpostDetail.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
@@ -28,6 +28,7 @@ function BlogpostDetail() {
 
     async function deletePostById() {
         toggleErrorDeletePost(false);
+        navigate("/blogposts/");
 
         try {
             const result = await axios.delete(`http://localhost:3000/posts/${id}`);
