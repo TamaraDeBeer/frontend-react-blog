@@ -1,0 +1,19 @@
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+input, textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    margin-bottom: 20px;
+}
