@@ -26,7 +26,6 @@ function AllPosts() {
         toggleLoading(false);
     }
 
-
     return (
         <main>
             <section className="all-posts-outer-container">

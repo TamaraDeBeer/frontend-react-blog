@@ -49,7 +49,6 @@ function BlogpostDetail() {
         toggleLoading(false);
     }
 
-
     return (
         <main>
             <div className="new-posts-outer-container ">
