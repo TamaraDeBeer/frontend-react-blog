@@ -6,11 +6,13 @@ import {Link} from "react-router-dom";
 function AllPosts() {
     const [allPosts, setAllPosts] = useState([]);
     const [errorAllPosts, toggleErrorAllPosts] = useState(false);
+    const [loading, toggleLoading] = useState(false);
 
     async function fetchAllPosts() {
         toggleErrorAllPosts(false);
 
         try {
+            toggleLoading(true);
             const result = await axios.get('http://localhost:3000/posts');
             console.log(result.data);
             setAllPosts(result.data);
@@ -18,6 +20,7 @@ function AllPosts() {
             console.error(e);
             toggleErrorAllPosts(true);
         }
+        toggleLoading(false);
     }
 
     return (
@@ -29,6 +32,8 @@ function AllPosts() {
                 {errorAllPosts &&
                     <p className="error-message">De connectie met de database is tijdelijk verbroken, probeer het over
                         enkele minuten nog eens...</p>}
+                {loading && <p>Loading...</p>}
+
                 <p>Totaal aantal blogs: {allPosts.length}</p>
                 {allPosts.map((post) => (
                     <div key={post.id} className="all-posts-inner-container">
