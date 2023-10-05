@@ -11,6 +11,7 @@ function NewPost() {
     const {register, formState: {errors}} = useForm();
     const [addPost, setAddPost] = useState([]);
     const [errorAddPost, toggleErrorAddPost] = useState(false);
+    const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
 
     async function handleFormSubmit(e) {
@@ -19,6 +20,7 @@ function NewPost() {
         navigate("/blogposts/");
 
         try {
+            toggleLoading(true);
             const result = await axios.post(`http://localhost:3000/posts`, {
                 title: e.target.title.value,
                 subtitle: e.target.subtitle.value,
@@ -31,13 +33,12 @@ function NewPost() {
             }, {
                 'Content-Type': 'application/json'
             });
-            console.log(result.data);
             setAddPost(result.data);
-
         } catch (e) {
             console.error(e);
             toggleErrorAddPost(true);
         }
+        toggleLoading(false);
     }
 
     return (
@@ -46,6 +47,7 @@ function NewPost() {
             <form onSubmit={handleFormSubmit}>
                 {errorAddPost &&
                     <p className="error-message">Er gaat helaas iets mis, probeer het later nog eens ...</p>}
+                {loading && <p>Loading...</p>}
 
                 <NewPostForm
                     inputType="text"
@@ -116,9 +118,6 @@ function NewPost() {
                 </textarea>
 
                 <button type="submit">Versturen</button>
-                {Object.keys(addPost).length > 0 &&
-                    <p>De post is succesvol verstuurd. <Link to={`/blogposts/${addPost.id}`}>Klik hier</Link></p>}
-
                 <button type="button" onClick={() => navigate("/blogposts/")}>Terug naar alle posts</button>
             </form>
         </main>

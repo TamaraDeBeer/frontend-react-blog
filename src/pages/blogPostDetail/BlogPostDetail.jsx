@@ -11,12 +11,18 @@ function BlogpostDetail() {
     const [deletePost, setDeletePost] = useState(false);
     const [errorGetById, toggleErrorGetById] = useState(false);
     const [errorDeletePost, toggleErrorDeletePost] = useState(false);
+    const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        void fetchPostById();
+    }, []);
 
     async function fetchPostById() {
         toggleErrorGetById(false);
 
         try {
+            toggleLoading(true);
             const result = await axios.get(`http://localhost:3000/posts/${id}`);
             console.log(result.data);
             setGetById(result.data);
@@ -24,6 +30,7 @@ function BlogpostDetail() {
             console.error(e);
             toggleErrorGetById(true);
         }
+        toggleLoading(false);
     }
 
     async function deletePostById() {
@@ -31,6 +38,7 @@ function BlogpostDetail() {
         navigate("/blogposts/");
 
         try {
+            toggleLoading(true);
             const result = await axios.delete(`http://localhost:3000/posts/${id}`);
             console.log(result.data);
             setDeletePost(true);
@@ -38,6 +46,7 @@ function BlogpostDetail() {
             console.error(e);
             toggleErrorDeletePost(true);
         }
+        toggleLoading(false);
     }
 
 
@@ -47,8 +56,10 @@ function BlogpostDetail() {
                 <h2>Blogpost Detail</h2>
 
                 <section className="new-posts-inner-container">
-                    <button type="button" onClick={() => fetchPostById()}>Get post by ID</button>
+
                     {errorGetById && <p className="error-message">Deze blog bestaat niet (meer).</p>}
+                    {loading && <p>Loading...</p>}
+
                     {Object.keys(getById).length > 0 &&
                         <div>
                             <h3>{getById.title} ({getById.readTime} minuten)</h3>
@@ -60,6 +71,7 @@ function BlogpostDetail() {
                             <button type="button" onClick={() => deletePostById()}>Verwijder deze post</button>
                             {errorDeletePost &&
                                 <p className="error-message">Er ging iets mis, allicht is deze post al verwijderd.</p>}
+                            {loading && <p>Loading...</p>}
                             {deletePost && <p>De post is succesvol verwijderd.</p>}
 
                             <button type="button" onClick={() => navigate(`/blogposts/${getById.id}/edit`)}>Bewerk deze

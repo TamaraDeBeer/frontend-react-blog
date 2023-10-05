@@ -1,5 +1,5 @@
 import './AllPosts.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
 
@@ -8,13 +8,16 @@ function AllPosts() {
     const [errorAllPosts, toggleErrorAllPosts] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
+    useEffect(() => {
+        void fetchAllPosts();
+    }, []);
+
     async function fetchAllPosts() {
         toggleErrorAllPosts(false);
 
         try {
             toggleLoading(true);
             const result = await axios.get('http://localhost:3000/posts');
-            console.log(result.data);
             setAllPosts(result.data);
         } catch (e) {
             console.error(e);
@@ -23,12 +26,12 @@ function AllPosts() {
         toggleLoading(false);
     }
 
+
     return (
         <main>
             <section className="all-posts-outer-container">
                 <h2>Overzichtspagina</h2>
 
-                <button type="button" onClick={fetchAllPosts}>Get all posts</button>
                 {errorAllPosts &&
                     <p className="error-message">De connectie met de database is tijdelijk verbroken, probeer het over
                         enkele minuten nog eens...</p>}
