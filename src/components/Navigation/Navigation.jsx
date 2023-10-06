@@ -1,5 +1,5 @@
 import {NavLink, useNavigate} from "react-router-dom";
-import './Navigation.css';
+import './Navigation.modules.css';
 import logo from '../../assets/logo-white.png';
 
 

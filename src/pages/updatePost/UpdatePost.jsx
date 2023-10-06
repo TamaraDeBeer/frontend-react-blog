@@ -12,6 +12,7 @@ function UpdatePost() {
     const [updatePost, setUpdatePost] = useState([]);
     const [errorUpdatePost, toggleErrorUpdatePost] = useState(false);
     const [getById, setGetById] = useState({});
+    const [title, setTitle] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,12 +25,15 @@ function UpdatePost() {
             const result = await axios.get(`http://localhost:3000/posts/${id}`);
             console.log(result.data);
             setGetById(result.data);
+            setTitle(result.data.title);
         } catch (e) {
             console.error(e);
         }
     }
 
     function handleChange(e) {
+        console.log(e.target.name)
+        console.log(e.target.value)
         setGetById({
             ...getById,
             [e.target.name]: e.target.value,
@@ -73,7 +77,8 @@ function UpdatePost() {
 
                 <NewPostForm
                     inputType="text"
-                    inputValue={getById.title}
+                    inputValue={title}
+                    onChange={setTitle}
                     inputName="title"
                     inputLabel="Titel:"
                     inputId="title"
@@ -94,6 +99,7 @@ function UpdatePost() {
                 <NewPostForm
                     inputType="text"
                     inputValue={getById.subtitle}
+                    onChange={handleChange}
                     inputName="subtitle"
                     inputLabel="Subtitel:"
                     inputId="subtitle"
@@ -114,6 +120,7 @@ function UpdatePost() {
                 <NewPostForm
                     inputType="text"
                     inputValue={getById.author}
+                    onChange={handleChange}
                     inputName="author"
                     inputLabel="Auteur:"
                     inputId="author"
@@ -130,7 +137,7 @@ function UpdatePost() {
                     register={register}
                     errors={errors}
                 />
-
+                {console.log(getById)}
                 <label htmlFor="post-content">Blog bericht:</label>
                 <textarea
                     name="content"
